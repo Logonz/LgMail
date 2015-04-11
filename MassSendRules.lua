@@ -1,5 +1,6 @@
 MassSendRules = { 
 	{
+		ListName = "Herbs",
 		Name = "Herbgon",
 		Items = {
 			13468,--BlackLotus
@@ -38,6 +39,7 @@ MassSendRules = {
 		}
 	},
 	{
+		ListName = "OresAndGems",
 		Name = "Bargon",
 		Items = {
 			3576,--TinBar
@@ -95,6 +97,7 @@ MassSendRules = {
 		}
 	},
 		{
+		ListName = "EnchantingAndDisenchanting",
 		Name = "Bankgon",
 		Items = {
 			11137,--VisionDust
@@ -131,6 +134,7 @@ MassSendRules = {
 		}
 	},
 	{
+		ListName = "ClothAndLeather",
 		Name = "Clothgon",
 		Items = {
 			14047,--Runecloth
@@ -185,6 +189,7 @@ MassSendRules = {
 		}
 	},
 	{
+		ListName = "Recipes",
 		Name = "Bankgon",
 		Items = {
 				--All Green Recipes in game
@@ -196,6 +201,7 @@ MassSendRules = {
 		}
 	},
 	{
+		ListName = "Tradegoods",
 		Name = "Bankgon",
 		Items = {
 			12803,--LivingEssence
@@ -206,5 +212,184 @@ MassSendRules = {
 			7080,--Water
 			7972--Ichor of Undeath
 		}
-	}
+	},
+	{
+		--Not manually checked!
+		ListName = "Cooking",
+		Name = "Bankgon",
+		Items = {
+			769,--Chunk of Boar Meat
+			13928,--Grilled Squid
+			3713,--Soothing Spices
+			3712,--Turtle Meat
+			16766,--Undermine Clam Chowder
+			13929,--Hot Smoked Bass
+			8150,--Deeprock Salt
+			13758,--Raw Redgill
+			5476,--Fillet of Frenzy
+			5477,--Strider Stew
+			5474,--Roasted Kodo Meat
+			5472,--Kaldorei Spider Kabob
+			5473,--Scorpid Surprise
+			5470,--Thunder Lizard Tail
+			5471,--Stag Meat
+			13935,--Baked Salmon
+			4470,--Simple Wood
+			5504,--Tangy Clam Meat
+			13931,--Nightfin Soup
+			3173,--Bear Meat
+			5478,--Dig Rat Stew
+			5479,--Crispy Lizard Tail
+			12213,--Carrion Surprise
+			20074,--Heavy Crocolisk Stew
+			3172,--Boar Intestines
+			12212,--Jungle Stew
+			3174,--Spider Ichor
+			1468,--Murloc Fin
+			13932,--Poached Sunscale Salmon
+			9061,--Goblin Rocket Fuel
+			20452,--Smoked Desert Dumplings
+			12215,--Heavy Kodo Stew
+			17198,--Egg Nog
+			5465,--Small Spider Leg
+			3404,--Buzzard Wing
+			5467,--Kodo Meat
+			5466,--Scorpid Stinger
+			5469,--Strider Meat
+			5468,--Soft Frenzy Flesh
+			21071,--Raw Sagefish
+			21072,--Smoked Sagefish
+			17194,--Holiday Spices
+			6657,--Savory Deviate Delight
+			12184,--Raptor Flesh
+			4402,--Small Flame Sac
+			6316,--Loch Frenzy Delight
+			6303,--Raw Slitherskin Mackerel
+			2251,--Gooey Spider Leg
+			13851,--Hot Wolf Ribs
+			1082,--Redridge Goulash
+			1081,--Crisp Spider Meat
+			1080,--Tough Condor Meat
+			13889,--Raw Whitescale Salmon
+			17222,--Spider Sausage
+			4655,--Giant Clam Meat
+			20424,--Sandworm Meat
+			6291,--Raw Brilliant Smallfish
+			13933,--Lobster Stew
+			7974,--Zesty Clam Meat
+			21217,--Sagefish Delight
+			13755,--Winter Squid
+			13754,--Raw Glossy Mightfish
+			13756,--Raw Summer Bass
+			13759,--Raw Nightfin Snapper
+			5095,--Rainbow Fin Albacore
+			5503,--Clam Meat
+			2665,--Stormwind Seasoning Herbs
+			6308,--Raw Bristle Whisker Catfish
+			1015,--Lean Wolf Flank
+			1017,--Seasoned Wolf Kabob
+			6289,--Raw Longjaw Mud Snapper
+			6317,--Raw Loch Frenzy
+			3665,--Curiously Tasty Omelet
+			3664,--Crocolisk Gumbo
+			3667,--Tender Crocolisk Meat
+			3666,--Gooey Spider Cake
+			3663,--Murloc Fin Soup
+			3662,--Crocolisk Steak
+			12224,--Crispy Bat Wing
+			5480,--Lean Venison
+			787,--Slitherskin Mackerel
+			2673,--Coyote Meat
+			2672,--Stringy Wolf Meat
+			2675,--Crawler Claw
+			2674,--Crawler Meat
+			2677,--Boar Ribs
+			2679,--Charred Wolf Meat
+			2678,--Mild Spices
+			2888,--Beer Basted Boar Ribs
+			2596,--Skin of Dwarven Stout
+			2924,--Crocolisk Meat
+			2452,--Swiftthistle
+			13927,--Cooked Glossy Mightfish
+			2886,--Crag Boar Rib
+			3821,--Goldthorn
+			4536,--Shiny Red Apple
+			12037,--Mystery Meat
+			731,--Goretusk Snout
+			730,--Murloc Eye
+			733,--Westfall Stew
+			2684,--Coyote Steak
+			2685,--Succulent Pork Ribs
+			6361,--Raw Rainbow Fin Albacore
+			2687,--Dry Pork Ribs
+			2680,--Spiced Wolf Meat
+			2681,--Roasted Boar Meat
+			2682,--Cooked Crab Claw
+			2683,--Crab Cake
+			18045,--Tender Wolf Steak
+			6887,--Spotted Yellowtail
+			6522,--Deviate Fish
+			3728,--Tasty Lion Steak
+			3729,--Soothing Turtle Bisque
+			6362,--Raw Rockscale Cod
+			3726,--Big Bear Steak
+			3727,--Hot Lion Chops
+			4603,--Raw Spotted Yellowtail
+			6888,--Herb Baked Egg
+			6889,--Small Egg
+			10841,--Goldthorn Tea
+			2894,--Rhapsody Malt
+			13760,--Raw Sunscale Salmon
+			13888,--Darkclaw Lobster
+			3685,--Raptor Egg
+			6290,--Brilliant Smallfish
+			724,--Goretusk Liver Pie
+			723,--Goretusk Liver
+			2692,--Hot Spices
+			729,--Stringy Vulture Meat
+			21023,--Dirge's Kickin' Chimaerok Chops
+			8365,--Raw Mithril Head Trout
+			8364,--Mithril Head Trout
+			21024,--Chimaerok Tenderloin
+			159,--Refreshing Spring Water
+			6890,--Smoked Bear Meat
+			4457,--Barbecued Buzzard Wing
+			5525,--Boiled Clams
+			5526,--Clam Chowder
+			5527,--Goblin Deviled Clams
+			7676,--Thistle Tea
+			5051,--Dig Rat
+			3731,--Lion Meat
+			3730,--Big Bear Meat
+			13893,--Large Raw Mightfish
+			13934,--Mightfish Steak
+			18254,--Runn Tum Tuber Surprise
+			4592,--Longjaw Mud Snapper
+			4593,--Bristle Whisker Catfish
+			12210,--Roast Raptor
+			12217,--Dragonbreath Chili
+			12216,--Spiced Chili Crab
+			4594,--Rockscale Cod
+			12214,--Mystery Stew
+			17197,--Gingerbread Cookie
+			17196,--Holiday Spirits
+			12218,--Monster Omelet
+			1179,--Ice Cold Milk
+			18255,--Runn Tum Tuber
+			12223,--Meaty Bat Wing
+			21153,--Raw Greater Sagefish
+			3220,--Blood Sausage
+			6038,--Giant Clam Scorcho
+			12208,--Tender Wolf Meat
+			12209,--Lean Wolf Steak
+			12204,--Heavy Kodo Meat
+			12205,--White Spider Meat
+			12206,--Tender Crab Meat
+			12207,--Giant Egg
+			13930,--Filet of Redgill
+			12202,--Tiger Meat
+			12203,--Red Wolf Meat
+		},
+	},
+
 };
