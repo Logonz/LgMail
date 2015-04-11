@@ -4,6 +4,8 @@ function LgMail_OnLoad()
 
 	this:RegisterEvent("VARIABLES_LOADED");
 	this:RegisterEvent("ADDON_LOADED");
+	this:RegisterEvent("MAIL_CLOSED");
+	this:RegisterEvent("MAIL_INBOX_UPDATE");
 
 	if( DEFAULT_CHAT_FRAME ) then
 		DEFAULT_CHAT_FRAME:AddMessage("LgMail v".."0.1".." loaded");
@@ -16,14 +18,127 @@ end
 QueueTick = GetTime();
 MAIL_SEND_TIME = 0.1; -- Not Needed really should send as fast as the server can handle it...
 
+OpenQueueTick = GetTime();
+
+
 function LgMail_OnUpdate()
 	if(table.getn(MailQueue) > 0 and GetTime() - QueueTick > MAIL_SEND_TIME) then
 		MailQueuedItem();
 		QueueTick = GetTime();
 		LgMail_PrintDebug("QueueTick", 1);
 	end
+	if(GetTime() - OpenQueueTick > 0.05 and ContinuousAHMailOpening == true and ContinuousMailOpening == false) then
+		OpenAHMail();
+		OpenQueueTick = GetTime();
+	end
+	if(table.getn(DeleteQueue) > 0 and WaitForUpdate == false and ContinuousAHMailOpening == false and ContinuousMailOpening == false) then
+		ProgressDeleteQueue();
+	end
+	if(GetTime() - OpenQueueTick > 0.05 and ContinuousAHMailOpening == false and ContinuousMailOpening == true) then
+		OpenMail();
+		OpenQueueTick = GetTime();
+	end
 end
 
+WaitForUpdate = false;
+DeleteQueue = {};
+function ProgressDeleteQueue()
+	Mail = DeleteQueue[1];
+	table.remove(DeleteQueue, 1);
+	for i = 0, GetInboxNumItems() do
+		packageIcon, stationeryIcon, sender, subject, money, CODAmount, daysLeft, hasItem, wasRead, wasReturned, textCreated, canReply = GetInboxHeaderInfo(i);
+		if(Mail.sender == sender and Mail.subject == subject and hasItem == nil and money == 0) then
+			DeleteInboxItem(i);
+			bodyText, texture, isTakeable, isInvoice = GetInboxText(i);
+			if(textCreated) then
+				LgMail_Print("Deleted Mail with no Items/Money: From: "..sender.." Subject: "..subject.." Text: "..bodyText.." Left: "..table.getn(DeleteQueue));
+			else
+				LgMail_Print("Deleted Mail with no Items/Money: From: "..sender.." Subject: "..subject.." Left: "..table.getn(DeleteQueue));
+			end
+			WaitForUpdate = true;
+		end
+	end
+end
+
+ContinuousMailOpening = false;
+function OpenMail()
+	for i = 0, GetInboxNumItems() do
+		packageIcon, stationeryIcon, sender, subject, money, CODAmount, daysLeft, hasItem, wasRead, wasReturned, textCreated, canReply = GetInboxHeaderInfo(i);
+		if(findEmptySlot()) then
+			if(hasItem or money ~= 0) then
+				name, itemTexture, count, quality, canUse = GetInboxItem(i);
+				--invoiceType, itemName, playerName, bid, buyout, deposit, consignment = GetInboxInvoiceInfo(i);
+
+				if(hasItem) then
+					TakeInboxItem(i);
+				end
+				if(money ~= 0) then
+					TakeInboxMoney(i);
+				end
+				Mail = {};
+				Mail.subject = subject;
+				Mail.sender = sender;
+				table.insert(DeleteQueue, Mail);
+
+				return;
+			end
+		else
+			LgMail_Print("Full Inventory - Stopping");
+			ContinuousMailOpening = false;
+			return;
+		end
+	end
+	LgMail_Print("--- Mail Done ---")
+	ContinuousMailOpening = false;
+end
+
+ContinuousAHMailOpening = false;
+function OpenAHMail()
+	for i = 0, GetInboxNumItems() do
+		packageIcon, stationeryIcon, sender, subject, money, CODAmount, daysLeft, hasItem, wasRead, wasReturned, textCreated, canReply = GetInboxHeaderInfo(i);
+		if(sender == "Stormwind Auction House") then
+			if(findEmptySlot()) then
+				name, itemTexture, count, quality, canUse = GetInboxItem(i);
+				--invoiceType, itemName, playerName, bid, buyout, deposit, consignment = GetInboxInvoiceInfo(i);
+				if(hasItem) then
+					TakeInboxItem(i);
+				end
+				if(money ~= 0) then
+					TakeInboxMoney(i);
+				end
+				if(IsAddOnLoaded("Lootlink") or ItemLinks ~= nil) then
+					--LgMail_Print("Mail Opened: Item: "..GetItemLink(name).."x"..count);
+				else
+					--LgMail_Print("Mail Opened: Item: "..itemName.."x"..count);
+				end
+				return;
+			else
+				LgMail_Print("Full Inventory - Stopping");
+				ContinuousAHMailOpening = false;
+				return;
+			end
+		end
+	end
+	LgMail_Print("--- AH Mail Done ---")
+	ContinuousAHMailOpening = false;
+end
+
+-------------------------------------------------------------------------------
+-- Inventory modifying functions
+-------------------------------------------------------------------------------
+
+function findEmptySlot()
+	for bag = 0, 4, 1 do
+		if (GetBagName(bag)) then
+			for item = GetContainerNumSlots(bag), 1, -1 do
+				if (not GetContainerItemInfo(bag, item)) then
+					return { bag=bag, slot=item };
+				end
+			end
+		end
+	end
+	return nil;
+end
 
 MailQueue = {};
 function MailQueuedItem()
@@ -35,6 +150,18 @@ function MailQueuedItem()
 	end
 end
 
+function GetItemLink(name)
+	local data = "";
+	local _, _, w, x, y, z = string.find(ItemLinks[name]["i"], "(%d+):(%d+):(%d+):(%d+)");
+	if(tonumber(x) == 0 and tonumber(y) == 0 and tonumber(z) == 0) then
+		data = w;
+	else
+		data = w .. ":" .. x .. ":" .. y .. ":" .. z;
+	end
+	local sName, sLink, iQuality, iLevel, sType, sSubType, iCount = GetItemInfo(data);
+	return sLink;
+end
+
 function MailItem(Item, Target, Subject, Body)
 	Subject = Item.name.."("..Item.count..")" or Subject;
 	Body = Item.name.."("..Item.count..")" or Body;
@@ -43,6 +170,15 @@ function MailItem(Item, Target, Subject, Body)
 	SendMail(Target, Subject, Body);
 end
 
+function LgMail_OpenAllAH()
+	LgMail_Print("Opening all AH Mail");
+	ContinuousAHMailOpening = true;
+end
+
+function LgMail_OpenAll()
+	LgMail_Print("Opening all Mail WARNING; DELETION OF MAILS IS AFTER IT OPENS ALL!");
+	ContinuousMailOpening = true;
+end
 
 function findItemSlot(itemId)
 	local items = {};
@@ -102,6 +238,12 @@ function LgMail_OnEvent(this, event, arg1, arg2, arg3, arg4, arg5, arg6, arg7, a
 		LgMail_Frame:SetPoint("TOPRIGHT","MailFrame","TOPRIGHT",275,-15);
 		InitUI();
 		--LgMail_Frame:Hide();
+	elseif(event == "MAIL_CLOSED") then
+		ContinuousAHMailOpening = false;
+		ContinuousMailOpening = false;
+		DeleteQueue = {};
+	elseif(event == "MAIL_INBOX_UPDATE") then
+		WaitForUpdate = false;
 	end
 end
 function LgMail_MailAll()
@@ -126,6 +268,18 @@ function LgMail_SlashHandler(msg)
 	if (not msg or msg=="") then
 		--Base command
 		LgMail_Print("SlashCommand Used");
+	end
+
+	if(msg == "test") then
+		packageIcon, stationeryIcon, sender, subject, money, CODAmount, daysLeft, hasItem, wasRead, wasReturned, textCreated, canReply = GetInboxHeaderInfo(1);
+		Mail = {};
+		Mail.subject = subject;
+		Mail.sender = sender;
+		table.insert(DeleteQueue, Mail);
+	end
+
+	if(msg == "OpenAll") then
+		ContinuousMailOpening = true;
 	end
 
 	if(msg == "MailAll") then

@@ -69,6 +69,42 @@
 		</Scripts>
 	</Button>
    
+   	<Button name="LgMail_OpenAllAH" frameStrata="DIALOG" parent="MailFrame" inherits="UIPanelButtonTemplate" text="Open AH">
+		<Size>
+			<AbsDimension x="60" y="20"/>
+		</Size>
+		<Anchors>
+			<Anchor relativePoint="Top" point="Right">
+				<Offset>
+					<AbsDimension x="120" y="-25"/>
+				</Offset>
+			</Anchor>
+		</Anchors>
+		<Scripts>
+			<OnClick>
+				LgMail_OpenAllAH();
+			</OnClick>
+		</Scripts>
+	</Button>
+
+	 <Button name="LgMail_OpenAll" frameStrata="DIALOG" parent="MailFrame" inherits="UIPanelButtonTemplate" text="Open All">
+		<Size>
+			<AbsDimension x="60" y="20"/>
+		</Size>
+		<Anchors>
+			<Anchor relativePoint="Top" point="Right">
+				<Offset>
+					<AbsDimension x="-60" y="-25"/>
+				</Offset>
+			</Anchor>
+		</Anchors>
+		<Scripts>
+			<OnClick>
+				LgMail_OpenAll();
+			</OnClick>
+		</Scripts>
+	</Button>
+
    <Frame name="LgMail_Frame" parent="MailFrame" toplevel="true" enableMouse="true" hidden="false">
    	<!-- <Size>
        <AbsDimension x="300" y="300" />
