@@ -391,5 +391,24 @@ MassSendRules = {
 			12203,--Red Wolf Meat
 		},
 	},
+	{
+		ListName = "Lockboxes",
+		Name = "Bankgon",
+		Items = {
+			12191,--Silver Dawning's Lockbox
+			5758,--Mithril Lockbox
+			19425,--Mysterious Lockbox
+			4633,--Heavy Bronze Lockbox
+			4632,--Ornate Bronze Lockbox
+			4637,--Steel Lockbox
+			4636,--Strong Iron Lockbox
+			4634,--Iron Lockbox
+			7870,--Thaumaturgy Vessel Lockbox
+			5759,--Thorium Lockbox
+			4638,--Reinforced Steel Lockbox
+			12192,--Mist Veil's Lockbox
+			5760,--Eternium Lockbox
+		},
+	},
 
 };
