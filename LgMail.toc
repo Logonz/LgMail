@@ -1,0 +1,4 @@
+## Interface: 11200
+## Title: LgMail
+## Notes: LgMail Modern mailmod for 1.12.1
+LgMail.xml

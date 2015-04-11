@@ -1,0 +1,104 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.blizzard.com/wow/ui/
+..\FrameXML\UI.xsd">
+	<!--<Script file="localization.lua"/>-->
+	<Script file="MassSendRules.lua"/>
+	<Script file="LgMailUI.lua"/>
+	<Script file="LgMail.lua"/>
+	<!--<Frame parent="UIParent">
+		<Frames>
+			<Button name="TitanPanelRecapButton" inherits="TitanPanelComboTemplate" frameStrata="FULLSCREEN" toplevel="true">
+				<Scripts>
+					<OnLoad>
+						BottomFeeder_OnLoad();
+					</OnLoad>
+					<OnMouseUp>
+						BottomFeeder_OnMouseUp(arg1);
+					</OnMouseUp>
+				</Scripts>
+			</Button>
+		</Frames>
+	</Frame>-->
+	
+	<!--<Frame name="ArmoryFetcher_Frame" parent="UIParent" toplevel="true" enableMouse="true" hidden="false">
+     <Size>
+       <AbsDimension x="200" y="200" />
+     </Size>
+     <Anchors>
+       <Anchor point="CENTER" />
+     </Anchors>
+     <Backdrop bgFile="Interface\DialogFrame\UI-DialogBox-Background"
+           edgeFile="Interface\DialogFrame\UI-DialogBox-Border" tile="true">
+       <BackgroundInsets>
+         <AbsInset left="11" right="12" top="12" bottom="11"/>
+       </BackgroundInsets>
+       <TileSize>
+         <AbsValue val="32"/>
+       </TileSize>
+       <EdgeSize>
+         <AbsValue val="32"/>
+       </EdgeSize>
+     </Backdrop>
+		<Scripts>
+			<OnUpdate>
+				ArmoryFetcher_OnUpdate();
+			</OnUpdate>
+			<OnLoad>
+				ArmoryFetcher_OnLoad();
+			</OnLoad>
+			<OnEvent>
+				ArmoryFetcher_OnEvent();
+			</OnEvent>
+		</Scripts>
+   </Frame>-->
+
+   	<Button name="LgMail_SendAll" frameStrata="DIALOG" parent="MailFrame" inherits="UIPanelButtonTemplate" text="Mail Banks">
+		<Size>
+			<AbsDimension x="120" y="20"/>
+		</Size>
+		<Anchors>
+			<Anchor relativePoint="Top" point="Right">
+				<Offset>
+					<AbsDimension x="60" y="-25"/>
+				</Offset>
+			</Anchor>
+		</Anchors>
+		<Scripts>
+			<OnClick>
+				LgMail_MailAll();
+			</OnClick>
+		</Scripts>
+	</Button>
+   
+   <Frame name="LgMail_Frame" parent="MailFrame" toplevel="true" enableMouse="true" hidden="false">
+   	<!-- <Size>
+       <AbsDimension x="300" y="300" />
+     </Size>
+     <Anchors>
+       <Anchor point="CENTER"/>
+     </Anchors>
+     <Backdrop bgFile="Interface\DialogFrame\UI-DialogBox-Background"
+           edgeFile="Interface\DialogFrame\UI-DialogBox-Border" tile="true">
+       <BackgroundInsets>
+         <AbsInset left="11" right="12" top="12" bottom="11"/>
+       </BackgroundInsets>
+       <TileSize>
+         <AbsValue val="32"/>
+       </TileSize>
+       <EdgeSize>
+         <AbsValue val="32"/>
+       </EdgeSize>
+     </Backdrop>-->
+		<Scripts>
+			<OnUpdate>
+				LgMail_OnUpdate();
+			</OnUpdate>
+			<OnLoad>
+				LgMail_OnLoad();
+			</OnLoad>
+			<OnEvent>
+				LgMail_OnEvent(this, event, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10);
+			</OnEvent>
+		</Scripts>
+   </Frame>
+
+</Ui>
