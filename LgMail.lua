@@ -236,7 +236,7 @@ function LgMail_OnEvent(this, event, arg1, arg2, arg3, arg4, arg5, arg6, arg7, a
 		LgMail_Frame:ClearAllPoints();
 		LgMail_Frame:SetParent(getglobal("MailFrame"));
 		LgMail_Frame:SetPoint("TOPRIGHT","MailFrame","TOPRIGHT",275,-15);
-		InitUI();
+		--InitUI();
 		--LgMail_Frame:Hide();
 	elseif(event == "MAIL_CLOSED") then
 		ContinuousAHMailOpening = false;
