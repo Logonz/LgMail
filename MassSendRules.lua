@@ -147,7 +147,12 @@ MassSendRules = {
 			14227,--IronwebSilk
 			10285,--ShadowSilk
 			3182,--SpiderSilk
-			4337--ThickSpiderSilk
+			4337,--ThickSpiderSilk
+			2996,--BoltLinen
+			2997,--BoltWool
+			4305,--BoltSilk
+			4339,--BoltMageweave
+			14048,--BoltRunecloth
 		}
 	},
 	{
