@@ -3,6 +3,7 @@
 	<!--<Script file="localization.lua"/>-->
 	<Script file="MassSendRules.lua"/>
 	<Script file="LgMailUI.lua"/>
+	<Script file="LgMailImport.lua"/>
 	<Script file="LgMail.lua"/>
 	<!--<Frame parent="UIParent">
 		<Frames>
@@ -136,5 +137,55 @@
 			</OnEvent>
 		</Scripts>
    </Frame>
+   	<Button name="LgMailListItemTemplate" hidden="true" virtual="true">
+		<Size>
+			<AbsDimension x="605" y="16"/>
+		</Size>
+		<Layers>
+			<Layer level="BORDER">
+				<FontString name="$parentColumn1" inherits="GameFontHighlight" wraponspaces="false" justifyH="LEFT" text="HEJ">
+					<Size>
+						<AbsDimension x="50" y="16"/>
+					</Size>
+					<Anchors>
+						<Anchor point="TOPLEFT">
+							<Offset>
+								<AbsDimension x="20" y="0"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</FontString>
+				<FontString name="$parentColumn2" inherits="GameFontHighlight" wraponspaces="false" justifyH="LEFT">
+					<Size>
+						<AbsDimension x="300" y="16"/>
+					</Size>
+					<Anchors>
+						<Anchor point="TOPLEFT" relativeTo="$parentColumn1" relativePoint="TOPRIGHT">
+							<Offset>
+								<AbsDimension x="30" y="0"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</FontString>
+			</Layer>
+		</Layers>
+		<Frames>
+		</Frames>
+		<HighlightTexture name="$parentHighlight" file="Interface\HelpFrame\HelpFrameButton-Highlight" alphaMode="ADD">
+			<Anchors>
+				<Anchor point="TOPLEFT">
+					<Offset>
+						<AbsDimension x="0" y="0"/>
+					</Offset>
+				</Anchor>
+				<Anchor point="BOTTOMRIGHT" relativePoint="BOTTOMRIGHT">
+					<Offset>
+						<AbsDimension x="0" y="0"/>
+					</Offset>
+				</Anchor>
+			</Anchors>
+			<TexCoords left="0" right="1.0" top="0" bottom="0.578125"/>
+		</HighlightTexture>
+	</Button>
 
 </Ui>
