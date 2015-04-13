@@ -134,7 +134,7 @@ MassSendRules = {
 		}
 	},
 	{
-		ListName = "ClothAndLeather",
+		ListName = "Cloth",
 		Name = "Clothgon",
 		Items = {
 			14047,--Runecloth
@@ -147,7 +147,13 @@ MassSendRules = {
 			14227,--IronwebSilk
 			10285,--ShadowSilk
 			3182,--SpiderSilk
-			4337,--ThickSpiderSilk
+			4337--ThickSpiderSilk
+		}
+	},
+	{
+		ListName = "Leather",
+		Name = "Leathergon",
+		Items = {
 			7286,--BlackWhelpScale
 			7392,--GreenWhelpScale
 			7287,--RedWhelpScale
@@ -210,7 +216,9 @@ MassSendRules = {
 			7078,--Fire
 			12808,--Undeath
 			7080,--Water
-			7972--Ichor of Undeath
+			7972,--Ichor of Undeath
+			7068,--ElementalFire
+			
 		}
 	},
 	{
@@ -234,7 +242,6 @@ MassSendRules = {
 			5470,--Thunder Lizard Tail
 			5471,--Stag Meat
 			13935,--Baked Salmon
-			4470,--Simple Wood
 			5504,--Tangy Clam Meat
 			13931,--Nightfin Soup
 			3173,--Bear Meat
@@ -395,18 +402,14 @@ MassSendRules = {
 		ListName = "Lockboxes",
 		Name = "Bankgon",
 		Items = {
-			12191,--Silver Dawning's Lockbox
 			5758,--Mithril Lockbox
-			19425,--Mysterious Lockbox
 			4633,--Heavy Bronze Lockbox
 			4632,--Ornate Bronze Lockbox
 			4637,--Steel Lockbox
 			4636,--Strong Iron Lockbox
 			4634,--Iron Lockbox
-			7870,--Thaumaturgy Vessel Lockbox
 			5759,--Thorium Lockbox
 			4638,--Reinforced Steel Lockbox
-			12192,--Mist Veil's Lockbox
 			5760,--Eternium Lockbox
 		},
 	},
