@@ -231,6 +231,8 @@ end
 function LgMail_OnEvent(this, event, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10)
 	if(event == "VARIABLES_LOADED") then
 		LgMail_Print("Vars Loaded");
+		SetUpRuleByID();
+		--InitConfig();
 	elseif(event =="ADDON_LOADED" and arg1 == "LgMail") then
 		--LgMail_Print("Addon Loaded");
 		LgMail_Frame:ClearAllPoints();
@@ -278,6 +280,19 @@ function LgMail_SlashHandler(msg)
 		table.insert(DeleteQueue, Mail);
 	end
 
+	if(msg == "init") then
+		InitConfig();
+	end
+
+	if(msg == "cfg") then
+		cfg = getglobal("LgMailConfigFrame");
+		if(cfg:IsShown()) then
+			cfg:Show();
+		else
+			cfg:Hide();
+		end
+	end
+
 	if(msg == "OpenAll") then
 		ContinuousMailOpening = true;
 	end
@@ -296,4 +311,74 @@ end
 
 function LgMail_Print(message)
 		DEFAULT_CHAT_FRAME:AddMessage("[LgMail]: "..message,1,1,0);
+end
+
+
+local function LgMailAddOwners(frame, id)
+	if not(frame and id and MassMailRuleByID[id]) then return end
+
+	frame:AddLine("Mail: "..MassMailRuleByID[id], 1, 0.5, 0.5);
+
+	frame:Show()
+end
+
+MassMailRuleByID = {};
+function SetUpRuleByID()
+	for k, v in pairs(MassSendRules) do
+		for indx, itemId in pairs(v.Items) do
+			MassMailRuleByID[itemId] = v.Name;
+		end
+	end
+end
+
+local function LinkToID(link)
+	if link then
+		local _, _, id = string.find(link, "(%d+):")
+		return tonumber(id)
+	end
+end
+
+
+--[[  Function Hooks ]]--
+
+local Blizz_GameTooltip_SetBagItem = GameTooltip.SetBagItem
+GameTooltip.SetBagItem = function(self, bag, slot)
+	Blizz_GameTooltip_SetBagItem(self, bag, slot)
+
+	LgMailAddOwners(self, LinkToID(GetContainerItemLink(bag, slot)))
+end
+
+local Bliz_GameTooltip_SetLootItem = GameTooltip.SetLootItem
+GameTooltip.SetLootItem = function(self, slot)
+	Bliz_GameTooltip_SetLootItem(self, slot)
+
+	LgMailAddOwners(self, LinkToID(GetLootSlotLink(slot)))
+end
+
+local Bliz_SetHyperlink = GameTooltip.SetHyperlink
+GameTooltip.SetHyperlink = function(self, link, count)
+	Bliz_SetHyperlink(self, link, count)
+
+	LgMailAddOwners(self, LinkToID(link))
+end
+
+local Bliz_ItemRefTooltip_SetHyperlink = ItemRefTooltip.SetHyperlink
+ItemRefTooltip.SetHyperlink = function(self, link, count)
+	Bliz_ItemRefTooltip_SetHyperlink(self, link, count)
+
+	LgMailAddOwners(self, LinkToID(link))
+end
+
+local Bliz_GameTooltip_SetLootRollItem = GameTooltip.SetLootRollItem
+GameTooltip.SetLootRollItem = function(self, rollID)
+	Bliz_GameTooltip_SetLootRollItem(self, rollID)
+
+	LgMailAddOwners(self, LinkToID(GetLootRollItemLink(rollID)))
+end
+
+local Bliz_GameTooltip_SetAuctionItem = GameTooltip.SetAuctionItem
+GameTooltip.SetAuctionItem = function(self, type, index)
+	Bliz_GameTooltip_SetAuctionItem(self, type, index)
+
+	LgMailAddOwners(self, LinkToID(GetAuctionItemLink(type, index)))
 end
